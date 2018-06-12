@@ -1,0 +1,621 @@
+[webserver]
+port = ":8080"
+hostname = "localhost"
+
+[cache]                     # configure a tile cache
+type = "file"               # a file cache will cache to the local file system
+basepath = "$FILE_CACHE_BASE_PATH"    # where to write the file cache
+
+[[providers]]
+name = "gpkgathens"
+type = "gpkg"
+#note that keys - i.e. "filepath" - are case sensitive!
+filepath = "$GPKG_ATHENS_PATH"
+
+    [[providers.layers]]
+    name = "amenities_points"
+    tablename = "amenities_points"
+    geometry_fieldname = "geom"
+    id_fieldname = "fid"
+
+    [[providers.layers]]
+    name = "amenities_polygons"
+    tablename = "amenities_polygons"
+    geometry_fieldname = "geom"
+    id_fieldname = "fid"
+
+    [[providers.layers]]
+    name = "aviation_lines"
+    tablename = "aviation_lines"
+    geometry_fieldname = "geom"
+    id_fieldname = "fid"
+
+    [[providers.layers]]
+    name = "aviation_points"
+    tablename = "aviation_points"
+    geometry_fieldname = "geom"
+    id_fieldname = "fid"
+
+    [[providers.layers]]
+    name = "aviation_polygons"
+    tablename = "aviation_polygons"
+    geometry_fieldname = "geom"
+    id_fieldname = "fid"
+
+    # [[providers.layers]]
+    # name = "boundary"
+    # tablename = "boundary"
+    # geometry_fieldname = "geom"
+    # id_fieldname = "id"
+
+    #chop up buildings_polygons geom (has 22982 records) into smaller sub-Layers - see below
+    # [[providers.layers]]
+    # name = "buildings_polygons"
+    # tablename = "buildings_polygons"
+    # fields = ["building", "addr:street", "addr:housenumber"]
+    # geometry_fieldname = "geom"
+    # id_fieldname = "fid"
+
+    #buildings_polygons sub-Layers: BEGIN
+      [[providers.layers]]
+      name = "buildings_polygons_1"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid <= 1024 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_2"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 1024 AND l.fid <= 2048 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_3"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 2048 AND l.fid <= 3072 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_4"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 3072 AND l.fid <= 4096 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_5"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 4096 AND l.fid <= 5120 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_6"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 5120 AND l.fid <= 6144 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_7"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 6144 AND l.fid <= 7168 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_8"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 7168 AND l.fid <= 8192 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_9"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 8192 AND l.fid <= 9216 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_10"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 9216 AND l.fid <= 10240 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_11"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 10240 AND l.fid <= 11264 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_12"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 11264 AND l.fid <= 12288 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_13"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 12288 AND l.fid <= 13312 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_14"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 13312 AND l.fid <= 14336 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_15"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 14336 AND l.fid <= 15360 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_16"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 15360 AND l.fid <= 16384 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_17"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 16384 AND l.fid <= 17408 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_18"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 17408 AND l.fid <= 18432 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_19"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 18432 AND l.fid <= 19456 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_20"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 19456 AND l.fid <= 20480 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_21"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 20480 AND l.fid <= 21504 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_22"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 21504 AND l.fid <= 22528 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "buildings_polygons_23"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM buildings_polygons l JOIN rtree_buildings_polygons_geom si ON l.fid = si.id WHERE l.fid > 22528 AND geom IS NOT NULL AND !BBOX!"
+    #buildings_polygons sub-Layers: END
+
+    [[providers.layers]]
+    name = "harbours_points"
+    tablename = "harbours_points"
+    geometry_fieldname = "geom"
+    id_fieldname = "fid"
+
+    [[providers.layers]]
+    name = "land_polygons"
+    tablename = "land_polygons"
+    geometry_fieldname = "geom"
+    id_fieldname = "ogc_fid"
+
+    [[providers.layers]]
+    name = "landuse_polygons"
+    tablename = "landuse_polygons"
+    geometry_fieldname = "geom"
+    id_fieldname = "fid"
+
+    [[providers.layers]]
+    name = "leisure_polygons"
+    tablename = "leisure_polygons"
+    geometry_fieldname = "geom"
+    id_fieldname = "fid"
+
+    [[providers.layers]]
+    name = "natural_lines"
+    tablename = "natural_lines"
+    geometry_fieldname = "geom"
+    id_fieldname = "fid"
+
+    [[providers.layers]]
+    name = "natural_polygons"
+    tablename = "natural_polygons"
+    geometry_fieldname = "geom"
+    id_fieldname = "fid"
+
+    [[providers.layers]]
+    name = "places_points"
+    tablename = "places_points"
+    fields = ["place", "is_in"]
+    geometry_fieldname = "geom"
+    id_fieldname = "fid"
+
+    [[providers.layers]]
+    name = "places_polygons"
+    tablename = "places_polygons"
+    geometry_fieldname = "geom"
+    id_fieldname = "fid"
+
+    [[providers.layers]]
+    name = "rail_lines"
+    tablename = "rail_lines"
+    geometry_fieldname = "geom"
+    id_fieldname = "fid"
+
+    #chop up roads_lines geom (has 6979 records) into smaller sub-Layers - see below
+    # [[providers.layers]]
+    # name = "roads_lines"
+    # tablename = "roads_lines"
+    # fields = ["highway"]
+    # geometry_fieldname = "geom"
+    # id_fieldname = "fid"
+
+    #roads_lines sub-Layers: BEGIN
+    [[providers.layers]]
+      name = "roads_lines_1"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM roads_lines l JOIN rtree_roads_lines_geom si ON l.fid = si.id WHERE l.fid <= 1024 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "roads_lines_2"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM roads_lines l JOIN rtree_roads_lines_geom si ON l.fid = si.id WHERE l.fid > 1024 AND l.fid <= 2048 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "roads_lines_3"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM roads_lines l JOIN rtree_roads_lines_geom si ON l.fid = si.id WHERE l.fid > 2048 AND l.fid <= 3072 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "roads_lines_4"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM roads_lines l JOIN rtree_roads_lines_geom si ON l.fid = si.id WHERE l.fid > 3072 AND l.fid <= 4096 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "roads_lines_5"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM roads_lines l JOIN rtree_roads_lines_geom si ON l.fid = si.id WHERE l.fid > 4096 AND l.fid <= 5120 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "roads_lines_6"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM roads_lines l JOIN rtree_roads_lines_geom si ON l.fid = si.id WHERE l.fid > 5120 AND l.fid <= 6144 AND geom IS NOT NULL AND !BBOX!"
+
+      [[providers.layers]]
+      name = "roads_lines_7"
+      id_fieldname = "fid"
+      geometry_fieldname = "geom"
+      sql = "SELECT * FROM roads_lines l JOIN rtree_roads_lines_geom si ON l.fid = si.id WHERE l.fid > 6144 AND geom IS NOT NULL AND !BBOX!"
+    #roads_lines sub-Layers: END
+
+    [[providers.layers]]
+    name = "towers_antennas_points"
+    tablename = "towers_antennas_points"
+    geometry_fieldname = "geom"
+    id_fieldname = "fid"
+
+    [[providers.layers]]
+    name = "waterways_lines"
+    tablename = "waterways_lines"
+    geometry_fieldname = "geom"
+    id_fieldname = "fid"
+
+[[maps]]
+name = "athens"
+attribution = "Tegola GPKG"
+
+center = [23.75098, 37.8902, 11.69]
+
+  [[maps.layers]]
+  name = "amenities_points"
+  provider_layer = "gpkgathens.amenities_points"
+  min_zoom = 10
+  max_zoom = 22
+
+  [[maps.layers]]
+	name = "amenities_polygons"
+	provider_layer = "gpkgathens.amenities_polygons"
+	min_zoom = 10
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "aviation_lines"
+	provider_layer = "gpkgathens.aviation_lines"
+	min_zoom = 10
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "aviation_points"
+	provider_layer = "gpkgathens.aviation_points"
+	min_zoom = 10
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "aviation_polygons"
+	provider_layer = "gpkgathens.aviation_polygons"
+	min_zoom = 10
+	max_zoom = 22
+
+  # [[maps.layers]]
+	# name = "boundary"
+	# provider_layer = "gpkgathens.boundary"
+	# min_zoom = 5
+	# max_zoom = 22
+
+  #chop up buildings_polygons geom into smaller sub-Layers - see below
+  # [[maps.layers]]
+	# name = "buildings_polygons"
+	# provider_layer = "gpkgathens.buildings_polygons"
+	# min_zoom = 10
+	# max_zoom = 22
+
+  #buildings_polygons sub-Layers: BEGIN
+    [[maps.layers]]
+    name = "buildings_polygons_1"
+    provider_layer = "gpkgathens.buildings_polygons_1"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_2"
+    provider_layer = "gpkgathens.buildings_polygons_2"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_3"
+    provider_layer = "gpkgathens.buildings_polygons_3"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_4"
+    provider_layer = "gpkgathens.buildings_polygons_4"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_5"
+    provider_layer = "gpkgathens.buildings_polygons_5"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_6"
+    provider_layer = "gpkgathens.buildings_polygons_6"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_7"
+    provider_layer = "gpkgathens.buildings_polygons_7"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_8"
+    provider_layer = "gpkgathens.buildings_polygons_8"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_9"
+    provider_layer = "gpkgathens.buildings_polygons_9"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_10"
+    provider_layer = "gpkgathens.buildings_polygons_10"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_11"
+    provider_layer = "gpkgathens.buildings_polygons_11"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_12"
+    provider_layer = "gpkgathens.buildings_polygons_12"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_13"
+    provider_layer = "gpkgathens.buildings_polygons_13"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_14"
+    provider_layer = "gpkgathens.buildings_polygons_14"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_15"
+    provider_layer = "gpkgathens.buildings_polygons_15"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_16"
+    provider_layer = "gpkgathens.buildings_polygons_16"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_17"
+    provider_layer = "gpkgathens.buildings_polygons_17"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_18"
+    provider_layer = "gpkgathens.buildings_polygons_18"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_19"
+    provider_layer = "gpkgathens.buildings_polygons_19"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_20"
+    provider_layer = "gpkgathens.buildings_polygons_20"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_21"
+    provider_layer = "gpkgathens.buildings_polygons_21"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_22"
+    provider_layer = "gpkgathens.buildings_polygons_22"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "buildings_polygons_23"
+    provider_layer = "gpkgathens.buildings_polygons_23"
+    min_zoom = 10
+    max_zoom = 22
+  #buildings_polygons sub-Layers: END
+
+  [[maps.layers]]
+	name = "harbours_points"
+	provider_layer = "gpkgathens.harbours_points"
+	min_zoom = 10
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "land_polygons"
+	provider_layer = "gpkgathens.land_polygons"
+	min_zoom = 10
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "landuse_polygons"
+	provider_layer = "gpkgathens.landuse_polygons"
+	min_zoom = 10
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "leisure_polygons"
+	provider_layer = "gpkgathens.leisure_polygons"
+	min_zoom = 10
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "natural_lines"
+	provider_layer = "gpkgathens.natural_lines"
+	min_zoom = 10
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "natural_polygons"
+	provider_layer = "gpkgathens.natural_polygons"
+	min_zoom = 10
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "places_points"
+	provider_layer = "gpkgathens.places_points"
+	min_zoom = 10
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "places_polygons"
+	provider_layer = "gpkgathens.places_polygons"
+	min_zoom = 10
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "rail_lines"
+	provider_layer = "gpkgathens.rail_lines"
+	min_zoom = 10
+	max_zoom = 22
+
+  # [[maps.layers]]
+	# name = "roads_lines"
+	# provider_layer = "gpkgathens.roads_lines"
+	# min_zoom = 10
+	# max_zoom = 22
+
+  #roads_lines sub-Layers: BEGIN
+    [[maps.layers]]
+    name = "roads_lines_1"
+    provider_layer = "gpkgathens.roads_lines_1"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "roads_lines_2"
+    provider_layer = "gpkgathens.roads_lines_2"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "roads_lines_3"
+    provider_layer = "gpkgathens.roads_lines_3"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "roads_lines_4"
+    provider_layer = "gpkgathens.roads_lines_4"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "roads_lines_5"
+    provider_layer = "gpkgathens.roads_lines_5"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "roads_lines_6"
+    provider_layer = "gpkgathens.roads_lines_6"
+    min_zoom = 10
+    max_zoom = 22
+
+    [[maps.layers]]
+    name = "roads_lines_7"
+    provider_layer = "gpkgathens.roads_lines_7"
+    min_zoom = 10
+    max_zoom = 22
+  #roads_lines sub-Layers: END
+
+  [[maps.layers]]
+	name = "towers_antennas_points"
+	provider_layer = "gpkgathens.towers_antennas_points"
+	min_zoom = 10
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "waterways_lines"
+	provider_layer = "gpkgathens.waterways_lines"
+	min_zoom = 10
+	max_zoom = 22
