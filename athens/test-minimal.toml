@@ -1,0 +1,31 @@
+[webserver]
+port = ":8080"
+hostname = "localhost"
+
+[cache]                     # configure a tile cache
+type = "file"               # a file cache will cache to the local file system
+basepath = "$FILE_CACHE_BASE_PATH"    # where to write the file cache
+
+[[providers]]
+name = "gpkgathens"
+type = "gpkg"
+#note that keys - i.e. "filepath" - are case sensitive!
+filepath = "$GPKG_ATHENS_PATH"
+
+    [[providers.layers]]
+	name = "roads_lines"
+    tablename = "roads_lines"
+    id_fieldname = "fid"
+    fields = ["highway"]
+
+[[maps]]
+name = "athens"
+attribution = "Tegola GPKG"
+
+center = [23.7068, 37.8975, 12.0]
+
+	[[maps.layers]]
+	name = "roads_lines"
+	provider_layer = "gpkgathens.roads_lines"
+	min_zoom = 10
+	max_zoom = 22
