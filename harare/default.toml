@@ -1,0 +1,248 @@
+[webserver]
+port = ":8080"
+hostname = "localhost"
+
+[cache]                     # configure a tile cache
+type = "file"               # a file cache will cache to the local file system
+basepath = "$FILE_CACHE_BASE_PATH"    # where to write the file cache
+
+[[providers]]
+name = "gpkgharare"
+type = "gpkg"
+#note that keys are case sensitive!
+filepath = "$GPKG_HARARE_PATH"
+
+    [[providers.layers]]
+    name = "amenities_points"
+    tablename = "amenities_points"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "amenities_polygons"
+    tablename = "amenities_polygons"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "aviation_lines"
+    tablename = "aviation_lines"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "aviation_points"
+    tablename = "aviation_points"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "aviation_polygons"
+    tablename = "aviation_polygons"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "buildings_polygons"
+    tablename = "buildings_polygons"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "harbours_points"
+    tablename = "harbours_points"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "land_polygons"
+    tablename = "land_polygons"
+    id_fieldname = "ogc_fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "landuse_polygons"
+    tablename = "landuse_polygons"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "leisure_polygons"
+    tablename = "leisure_polygons"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "natural_lines"
+    tablename = "natural_lines"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "natural_polygons"
+    tablename = "natural_polygons"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "places_points"
+    tablename = "places_points"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "places_polygons"
+    tablename = "places_polygons"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "rail_lines"
+    tablename = "rail_lines"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "roads_lines"
+    tablename = "roads_lines"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+    fields = ["highway", "name"]
+
+    [[providers.layers]]
+    name = "towers_antennas_points"
+    tablename = "towers_antennas_points"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    [[providers.layers]]
+    name = "waterways_lines"
+    tablename = "waterways_lines"
+    id_fieldname = "fid"
+    geometry_fieldname = "geom"
+
+    # [[providers.layers]]
+    # name = "boundary"
+    # #geometry_fieldname = "geom"
+    # tablename = "boundary"
+    # id_fieldname = "fid"
+
+[[maps]]
+name = "harare"
+attribution = "Tegola GPKG"
+
+center = [31.0335, -17.8252, 14.7]
+
+  [[maps.layers]]
+  name = "amenities_points"
+  provider_layer = "gpkgharare.amenities_points"
+  min_zoom = 13
+  max_zoom = 22
+
+  [[maps.layers]]
+	name = "amenities_polygons"
+	provider_layer = "gpkgharare.amenities_polygons"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "aviation_lines"
+	provider_layer = "gpkgharare.aviation_lines"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "aviation_points"
+	provider_layer = "gpkgharare.aviation_points"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "aviation_polygons"
+	provider_layer = "gpkgharare.aviation_polygons"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "buildings_polygons"
+	provider_layer = "gpkgharare.buildings_polygons"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "harbours_points"
+	provider_layer = "gpkgharare.harbours_points"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "land_polygons"
+	provider_layer = "gpkgharare.land_polygons"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "landuse_polygons"
+	provider_layer = "gpkgharare.landuse_polygons"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "leisure_polygons"
+	provider_layer = "gpkgharare.leisure_polygons"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "natural_lines"
+	provider_layer = "gpkgharare.natural_lines"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "natural_polygons"
+	provider_layer = "gpkgharare.natural_polygons"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "places_points"
+	provider_layer = "gpkgharare.places_points"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "places_polygons"
+	provider_layer = "gpkgharare.places_polygons"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "rail_lines"
+	provider_layer = "gpkgharare.rail_lines"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "roads_lines"
+	provider_layer = "gpkgharare.roads_lines"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "towers_antennas_points"
+	provider_layer = "gpkgharare.towers_antennas_points"
+	min_zoom = 13
+	max_zoom = 22
+
+  [[maps.layers]]
+	name = "waterways_lines"
+	provider_layer = "gpkgharare.waterways_lines"
+	min_zoom = 13
+	max_zoom = 22
+
+	# [[maps.layers]]
+	# name = "boundary"
+	# provider_layer = "gpkgharare.boundary"
+	# min_zoom = 5
+	# max_zoom = 22
