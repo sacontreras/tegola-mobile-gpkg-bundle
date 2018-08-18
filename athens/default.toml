@@ -4,13 +4,13 @@ hostname = "localhost"
 
 [cache]                     # configure a tile cache
 type = "file"               # a file cache will cache to the local file system
-basepath = "$FILE_CACHE_BASE_PATH"    # where to write the file cache
+basepath = "${FILE_CACHE_BASE_PATH}"    # where to write the file cache
 
 [[providers]]
 name = "gpkgathens"
 type = "gpkg"
 #note that keys - i.e. "filepath" - are case sensitive!
-filepath = "$GPKG_ATHENS_PATH"
+filepath = "${GPKG_ATHENS_PATH}"
 
     [[providers.layers]]
     name = "amenities_points"
